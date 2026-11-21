@@ -1,0 +1,224 @@
+/* ═══════════════════════════════════════════════════════════════════
+   HELISA — AccountsPage Layout & Styles
+   ═══════════════════════════════════════════════════════════════════ */
+
+.accounts-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  padding: 0 0 48px 0;
+}
+
+/* ── Header ────────────────────────────────────────────────────────── */
+
+.accounts-header {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 32px;
+  box-shadow: var(--shadow-sm);
+}
+
+.accounts-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.accounts-header__logo {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--accent) 0%, #4f46e5 100%);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35);
+}
+
+.accounts-header__logo span {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.accounts-header__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.accounts-header__subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* ── Barra de Estadísticas ─────────────────────────────────────────── */
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 24px 32px;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-elevated);
+}
+
+.stat-card__label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-card__value {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.stat-card--clase .stat-card__value {
+  color: var(--clase-color);
+}
+
+.stat-card--grupo .stat-card__value {
+  color: var(--grupo-color);
+}
+
+.stat-card--cuenta .stat-card__value {
+  color: var(--cuenta-color);
+}
+
+.stat-card--subcuenta .stat-card__value {
+  color: var(--subcuenta-color);
+}
+
+/* ── Main Layout (2 Columnas) ───────────────────────────────────────── */
+
+.accounts-main {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 24px;
+  padding: 0 32px;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.accounts-main__tree {
+  min-width: 0;
+}
+
+.accounts-main__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Tarjeta de Reglas PUC ─────────────────────────────────────────── */
+
+.puc-rules-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+}
+
+.puc-rules-card__title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.puc-rules-card__title::before {
+  content: '📋';
+  font-size: 0.95rem;
+}
+
+.puc-rules-card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.puc-rules-card__list li {
+  position: relative;
+  padding-left: 14px;
+}
+
+.puc-rules-card__list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.puc-rules-card__list strong {
+  color: var(--text-primary);
+}
+
+/* ── Responsive ────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .accounts-main {
+    grid-template-columns: 1fr;
+  }
+
+  .accounts-main__sidebar {
+    order: -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .accounts-header {
+    padding: 16px 20px;
+  }
+
+  .stats-bar {
+    padding: 16px 20px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .accounts-main {
+    padding: 0 20px;
+  }
+}
+

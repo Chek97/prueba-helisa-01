@@ -24,3 +24,8 @@ npm-debug.log*
 coverage
 .nyc_output
 temp
+
+# base de datos SQLite (generada en runtime)
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal

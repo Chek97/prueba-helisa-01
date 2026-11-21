@@ -1,0 +1,427 @@
+/* ═══════════════════════════════════════════════════════════════════
+   HELISA — AccountTree & AccountTreeNodeItem Styles
+   ═══════════════════════════════════════════════════════════════════ */
+
+.account-tree-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.account-tree-card__header {
+  padding: 20px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.account-tree-card__title-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-tree-card__title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.account-tree-card__count {
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--accent-light);
+  color: #c4b5fd;
+  border: 1px solid var(--border-accent);
+}
+
+.account-tree-card__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tree-btn {
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-hover);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tree-btn:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.tree-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tree-btn--icon {
+  padding: 6px 10px;
+}
+
+.refresh-icon {
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.refresh-icon--spinning {
+  animation: spin 0.8s linear infinite;
+}
+
+/* ── Búsqueda ──────────────────────────────────────────────────────── */
+
+.account-tree-card__search {
+  padding: 12px 24px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.search-icon {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-family: var(--font-sans);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.clear-search-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.clear-search-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+/* ── Cuerpo del árbol ──────────────────────────────────────────────── */
+
+.account-tree-card__body {
+  padding: 16px;
+  min-height: 380px;
+  max-height: 640px;
+  overflow-y: auto;
+}
+
+.account-tree-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Nodo Jerárquico / Acordeón ─────────────────────────────────────── */
+
+.account-node {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.account-node__content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.account-node__content:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-hover);
+}
+
+/* Indentación por nivel de profundidad */
+.account-node--depth-1 { margin-left: 20px; }
+.account-node--depth-2 { margin-left: 40px; }
+.account-node--depth-3 { margin-left: 60px; }
+
+.account-node__toggle {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.account-node__toggle:hover:not(:disabled) {
+  background: var(--bg-active);
+  color: var(--text-primary);
+}
+
+.account-node__toggle--empty {
+  cursor: default;
+}
+
+.account-node__chevron {
+  display: inline-block;
+  font-size: 0.65rem;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--accent-light);
+  color: #a78bfa;
+}
+
+.account-node__chevron--open {
+  transform: rotate(90deg);
+}
+
+.account-node__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  opacity: 0.6;
+}
+
+.account-node__info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  cursor: pointer;
+  outline: none;
+}
+
+.account-node__code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-code);
+  background: rgba(165, 180, 252, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(165, 180, 252, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.account-node__name {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.account-node__counter {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: var(--bg-active);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ── Badges ────────────────────────────────────────────────────────── */
+
+.account-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.badge--clase {
+  background: var(--clase-bg);
+  color: var(--clase-color);
+  border: 1px solid rgba(192, 132, 252, 0.3);
+}
+
+.badge--grupo {
+  background: var(--grupo-bg);
+  color: var(--grupo-color);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.badge--cuenta {
+  background: var(--cuenta-bg);
+  color: var(--cuenta-color);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.badge--subcuenta {
+  background: var(--subcuenta-bg);
+  color: var(--subcuenta-color);
+  border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
+.nature-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.nature-badge--debito {
+  background: var(--debito-bg);
+  color: var(--debito-color);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.nature-badge--credito {
+  background: var(--credito-bg);
+  color: var(--credito-color);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+/* ── Acciones de nodo ──────────────────────────────────────────────── */
+
+.account-node__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+
+.account-node__content:hover .account-node__actions {
+  opacity: 1;
+}
+
+.account-node__btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition);
+}
+
+.account-node__btn--add:hover {
+  background: var(--accent-light);
+  border-color: var(--border-accent);
+  color: #c4b5fd;
+}
+
+.account-node__btn--delete {
+  padding: 5px;
+  color: var(--text-muted);
+}
+
+.account-node__btn--delete:hover {
+  background: var(--danger-bg);
+  border-color: var(--danger-border);
+  color: var(--danger);
+}
+
+.account-node__trash-icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* ── Hijos ─────────────────────────────────────────────────────────── */
+
+.account-node__children {
+  list-style: none;
+  margin: 6px 0 0 0;
+  padding: 0 0 0 12px;
+  border-left: 2px dashed rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ── Estados de árbol ──────────────────────────────────────────────── */
+
+.tree-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  text-align: center;
+  gap: 12px;
+  color: var(--text-secondary);
+}
+
+.tree-state__icon {
+  font-size: 2.5rem;
+  opacity: 0.6;
+}
+
+.tree-state__title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tree-state__desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
