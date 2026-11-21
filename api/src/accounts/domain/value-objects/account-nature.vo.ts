@@ -1,8 +1,13 @@
+import { DomainError } from '../errors/account.errors.js';
+
 export type NatureType = 'DEBITO' | 'CREDITO';
 
 /**
  * Value Object que representa la naturaleza contable de una Clase.
  * Solo las Clases la poseen directamente; sus descendientes la heredan.
+ *
+ * Lanza `DomainError` para que el filtro de excepciones lo mapee
+ * automáticamente a una respuesta HTTP estructurada.
  */
 export class AccountNature {
   private readonly _value: NatureType;
@@ -12,11 +17,12 @@ export class AccountNature {
   }
 
   static create(raw: string): AccountNature {
-    const upper = raw.trim().toUpperCase();
+    const upper = (raw ?? '').trim().toUpperCase();
 
     if (upper !== 'DEBITO' && upper !== 'CREDITO') {
-      throw new Error(
+      throw new DomainError(
         `Naturaleza inválida: "${raw}". Los valores permitidos son DEBITO o CREDITO.`,
+        'INVALID_NATURE',
       );
     }
 

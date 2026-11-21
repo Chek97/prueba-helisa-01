@@ -1,3 +1,5 @@
+import { DomainError } from '../errors/account.errors.js';
+
 export type AccountLevel = 'CLASE' | 'GRUPO' | 'CUENTA' | 'SUBCUENTA';
 
 const VALID_LENGTHS = new Set([1, 2, 4, 6]);
@@ -24,6 +26,9 @@ const PARENT_LENGTH_BY_LENGTH: Record<number, number | null> = {
  *  - Solo dígitos numéricos.
  *  - Longitud válida: 1 (Clase), 2 (Grupo), 4 (Cuenta), 6 (Subcuenta).
  *  - El padre se deduce como el prefijo en el nivel inmediato anterior.
+ *
+ * Lanza `DomainError` para que el filtro de excepciones lo mapee
+ * automáticamente a una respuesta HTTP estructurada.
  */
 export class AccountCode {
   private readonly _value: string;
@@ -33,18 +38,20 @@ export class AccountCode {
   }
 
   static create(raw: string): AccountCode {
-    const trimmed = raw.trim();
+    const trimmed = (raw ?? '').trim();
 
     if (!/^\d+$/.test(trimmed)) {
-      throw new Error(
+      throw new DomainError(
         `El código "${raw}" solo debe contener dígitos numéricos.`,
+        'INVALID_CODE_FORMAT',
       );
     }
 
     if (!VALID_LENGTHS.has(trimmed.length)) {
-      throw new Error(
+      throw new DomainError(
         `El código "${raw}" tiene ${trimmed.length} dígito(s). ` +
           `Las longitudes permitidas son: 1 (Clase), 2 (Grupo), 4 (Cuenta), 6 (Subcuenta).`,
+        'INVALID_CODE_FORMAT',
       );
     }
 
