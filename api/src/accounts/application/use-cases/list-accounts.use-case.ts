@@ -1,10 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Account } from '../../domain/entities/account.entity.js';
 import { AccountLevel } from '../../domain/value-objects/account-code.vo.js';
-import {
-  ACCOUNT_REPOSITORY,
-  AccountRepository,
-} from '../../domain/repositories/account.repository.js';
+import * as accountRepository from '../../domain/repositories/account.repository.js';
 
 // ─── Nodo del árbol jerárquico ───────────────────────────────────────────────
 
@@ -36,8 +33,8 @@ export interface ListAccountsQuery {
 @Injectable()
 export class ListAccountsUseCase {
   constructor(
-    @Inject(ACCOUNT_REPOSITORY)
-    private readonly accountRepo: AccountRepository,
+    @Inject(accountRepository.ACCOUNT_REPOSITORY)
+    private readonly accountRepo: accountRepository.AccountRepository,
   ) {}
 
   async execute(query?: ListAccountsQuery): Promise<Account[]> {

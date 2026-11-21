@@ -6,7 +6,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { DomainError } from '../../../../domain/errors/account.errors.js';
+import { DomainError } from '../../../domain/errors/account.errors.js';
 
 /** Mapeo de código semántico de dominio → HTTP status */
 const HTTP_STATUS_MAP: Record<string, number> = {

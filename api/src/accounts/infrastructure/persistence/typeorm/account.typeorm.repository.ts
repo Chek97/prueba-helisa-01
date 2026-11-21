@@ -62,7 +62,7 @@ export class AccountTypeOrmRepository implements AccountRepository {
     const rootCode = code.charAt(0);
     const root = await this.repo.findOne({
       where: { code: rootCode },
-      select: ['nature'],
+      select: { nature: true },
     });
     return root?.nature ?? null;
   }

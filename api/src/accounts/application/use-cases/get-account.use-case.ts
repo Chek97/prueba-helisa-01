@@ -1,10 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Account } from '../../domain/entities/account.entity.js';
 import { AccountErrors } from '../../domain/errors/account.errors.js';
-import {
-  ACCOUNT_REPOSITORY,
-  AccountRepository,
-} from '../../domain/repositories/account.repository.js';
+import * as accountRepository from '../../domain/repositories/account.repository.js';
 
 /**
  * Caso de uso: Obtener una cuenta por código.
@@ -12,8 +9,8 @@ import {
 @Injectable()
 export class GetAccountUseCase {
   constructor(
-    @Inject(ACCOUNT_REPOSITORY)
-    private readonly accountRepo: AccountRepository,
+    @Inject(accountRepository.ACCOUNT_REPOSITORY)
+    private readonly accountRepo: accountRepository.AccountRepository,
   ) {}
 
   async execute(code: string): Promise<Account> {
